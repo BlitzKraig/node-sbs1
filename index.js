@@ -88,6 +88,17 @@ exports.parseSbs1Message = function(s) {
 
 exports.SBS1Message = function(parts) {
   // Replace empty strings (,,) with nulls.
+    // We want to check if parts 2, 3 and 5 are filled with 1's (weird dump1090 thing)
+    // We need to check each on their own, to avoid potential issues with real data containing 1's
+    if(parts[2] == '111'){
+      parts[2] = '';
+    }
+    if(parts[3] == '11111'){
+      parts[3] = '';
+    }
+    if(parts[5] == '111111'){
+      parts[5] = '';
+    }
   parts = parts.map(function (e) {
     if (e === '') {
       return null;
