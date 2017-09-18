@@ -113,15 +113,12 @@ exports.SBS1Message = function(parts) {
       this.transmission_type < 1 || this.transmission_type > 8) {
     throw new Error('Unknown message type: ' + parts[1]);
   }
-  this.session_id = parts[2];
-  this.aircraft_id = parts[3];
   this.hex_ident = parts[4];
-  this.flight_id = parts[5];
   this.generated_date = parts[6];
   this.generated_time = parts[7];
   this.logged_date = parts[8];
   this.logged_time = parts[9];
-  this.callsign = parts[10];
+  this.flight_id = parts[10];
   this.altitude = sbs1_value_to_int(parts[11]);
   this.ground_speed = sbs1_value_to_int(parts[12]);
   this.track = sbs1_value_to_int(parts[13]);
@@ -189,8 +186,6 @@ exports.SBS1Message.prototype.stringify = function() {
   var parts = [
     this.message_type,
     this.transmission_type, // int_to_sbs1_value
-    this.session_id,
-    this.aircraft_id,
     this.hex_ident,
     this.flight_id,
     this.generated_date,
